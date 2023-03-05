@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "apollo-server": "^3.12.0",
-    "graphql-tag": "^2.12.6"
+    "graphql-tag": "^2.12.6",
+    "lowdb": "^5.1.0",
+    "nanoid": "^4.0.1"
   },
   "name": "study-fullstack-graphql",
   "version": "1.0.0",
