@@ -1,6 +1,6 @@
 /**
  * GraphQL server has only one endpoint.
- * It does not respect HTTP 
+ * It does not respect HTTP
  * It always returns 200 even if errors occured
  * Only thing that's dynamic is the Query client sends
  * Query you send dictates what resolvers get executed
@@ -17,10 +17,21 @@ const typeDefs = gql`
     friends: [User]! # []! - friends is always an array with value in it. [User!] - inside the array the value has to be User type
   }
 
+  type Shoe {
+    brand: String!
+    size: Int!
+  }
+
+  input ShoesInput {
+    brand: String
+    size: Int
+  }
+
   # Query Definition - description of how a client can access this type
   type Query {
     me: User! # non-null User
     friends: [User]!
+    shoes(input: ShoesInput): [Shoe]!
   }
 `
 
@@ -34,6 +45,12 @@ const resolvers = {
         avatar: "http://test.png",
         friends: [],
       }
+    },
+    shoes(_, { input }) {
+      return [
+        { brand: "nike", size: 12 },
+        { brand: "adidas", size: 14 },
+      ].filter(shoe => shoe.brand === input.brand)
     },
   },
 }

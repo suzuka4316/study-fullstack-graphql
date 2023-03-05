@@ -2,8 +2,11 @@ module.exports = {
   // Step 3: define resolvers
   Query: {
     // top level resolver because it belongs to type Query
-    pets(_, __, context) { // initial value, arguments, context passed in server
-      return context.models.Pet.findMany()
+    pets(_, { input }, context) { // initial value, arguments, context passed in server
+      return context.models.Pet.findMany(input)
+    },
+    pet(_, {input}, context) {
+      return context.models.Pet.findOne(input)
     }
   },
   // Mutation: {
@@ -21,3 +24,5 @@ module.exports = {
 
   // }
 }
+
+// Arguments - allow clients to pass variable along with Queries that will be used in resolvers

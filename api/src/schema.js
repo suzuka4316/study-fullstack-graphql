@@ -12,11 +12,19 @@ const typeDefs = gql`
     createdAt: String!
     name: String!
     type: String!
+    img(height: String, width: String): String
+  }
+
+  # Input type is just like any other type but can be used only for argument
+  input PetInput {
+    name: String
+    type: String
   }
 
   # Step 2: Create Query type
   type Query {
-    pets: [Pet]!
+    pets(input: PetInput): [Pet]! # All arguments must be defined in Schema. You can put scalar or Input type, not custom type
+    pet(input: PetInput): Pet
   }
 `
 
